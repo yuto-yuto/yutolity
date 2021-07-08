@@ -3,15 +3,26 @@
   "version": "1.0.0",
   "description": "Utility functions",
   "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "scripts": {
     "build": "tsc",
+    "clean": "rm -rf ./dist",
     "test": "mocha --recursive --require ts-node/register ./**/*_spec.ts"
   },
-  "author": "yuto",
+  "publishConfig": {
+    "access": "public"
+  },
+  "author": "yuto.technicalfeeder",
+  "keywords": [
+    "yutolity",
+    "getValueOf",
+    "utility"
+  ],
   "repository": {
     "url": "https://github.com/yuto-yuto/yutolity",
     "type": "git"
   },
+  "homepage": "https://www.technicalfeeder.com/",
   "license": "MIT",
   "devDependencies": {
     "@types/chai": "^4.2.12",

@@ -1,6 +1,6 @@
 import "mocha";
 import { expect } from "chai";
-import { hasValue, notNull, notUndefined } from "../lib/GenericComparison";
+import { hasValue, notNull, notUndefined } from "../lib/TypeGuards";
 
 describe("GenericComparison", () => {
     const array = ["text", 123, null, undefined, "text2"];

@@ -1,2 +1,2 @@
-export * from "./lib/GenericComparison";
+export * from "./lib/TypeGuards";
 export * from "./lib/Object";

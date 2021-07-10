@@ -1,6 +1,6 @@
 import "mocha";
 import { expect } from "chai";
-import { getValueOf, isKeyOf, recursiveGetValueOf } from "../lib/Object";
+import { getValueOf, isKeyOf, recursiveGetValueOf, setValue } from "../lib/Object";
 
 describe("Object.ts", () => {
     const obj = {
@@ -32,7 +32,7 @@ describe("Object.ts", () => {
                 expect(result).to.equal(true);
             });
         });
-        
+
         it("should return false when the key doesn't exist", () => {
             const result = isKeyOf(obj, "notExistKey");
             expect(result).to.equal(false);
@@ -68,6 +68,57 @@ describe("Object.ts", () => {
         it("should get deep level property", () => {
             const result = recursiveGetValueOf(obj, "value.value");
             expect(result).to.equal(1);
+        });
+    });
+
+    describe("setValue", () => {
+        it("should set value to undefined ", () => {
+            const result = setValue(undefined, "key", 1);
+            expect(result).to.deep.equal({ key: 1 });
+        });
+        it("should set value to primitive value", () => {
+            const result = setValue("value", "key", 1);
+            expect(result).to.deep.equal({ key: 1 });
+        });
+        it("should set deep level property to primitive value", () => {
+            const result = setValue("value", "key.foo", 1);
+            expect(result).to.deep.equal({ key: { foo: 1 } });
+        });
+        it("should keep the value when the path is empty", () => {
+            const result = setValue("value", "", 1);
+            expect(result).to.equal("value");
+        });
+        it("should set space contained key when the path contains space", () => {
+            const result = setValue("value", "key. foo", 1);
+            expect(result).to.deep.equal({
+                key:
+                    { [" foo"]: 1 }
+            });
+        });
+        it("should set value to first level property when object is empty", () => {
+            const result = setValue({}, "key", 1);
+            expect(result).to.deep.equal({ key: 1 });
+        });
+        it("should set value to first level property when object is empty", () => {
+            const result = setValue({}, "key.foo", 1);
+            expect(result).to.deep.equal({
+                key: { foo: 1 }
+            });
+        });
+        it("should override the property when it is primitive value", () => {
+            const result = setValue({ key: 1 }, "key.foo", 1);
+            expect(result).to.deep.equal({
+                key: { foo: 1 }
+            });
+        });
+        it("should keep existing property when the object has other properties", () => {
+            const result = setValue({ key: { hoge: 22 } }, "key.foo", 1);
+            expect(result).to.deep.equal({
+                key: {
+                    foo: 1,
+                    hoge:22
+                }
+            });
         });
     });
 });

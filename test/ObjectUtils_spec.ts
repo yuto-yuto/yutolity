@@ -1,6 +1,6 @@
 import "mocha";
 import { expect } from "chai";
-import { getValueOf, isKeyOf, recursiveGetValueOf, setValue } from "../lib/Object";
+import { getValueOf, isKeyOf, recursiveGetValueOf, setValue } from "../lib/ObjectUtils";
 
 describe("Object.ts", () => {
     const obj = {

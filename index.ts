@@ -1,2 +1,2 @@
 export * from "./lib/TypeGuards";
-export * from "./lib/Object";
+export * from "./lib/ObjectUtils";

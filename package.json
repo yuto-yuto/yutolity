@@ -1,6 +1,6 @@
 {
   "name": "yutolity",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Utility functions",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -15,6 +15,7 @@
   "author": "yuto.technicalfeeder",
   "keywords": [
     "yutolity",
+    "setValue",
     "getValueOf",
     "utility"
   ],

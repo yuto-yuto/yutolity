@@ -2,3 +2,5 @@ node_modules
 test
 tsconfig.json
 index.ts
+.vscode
+lib/**/*.ts

@@ -111,7 +111,7 @@ describe("Object.ts", () => {
                 key: { foo: 1 }
             });
         });
-        it("should keep existing property when the object has other properties", () => {
+        it("should keep existing property when the object has another", () => {
             const result = setValue({ key: { hoge: 22 } }, "key.foo", 1);
             expect(result).to.deep.equal({
                 key: {

@@ -10,35 +10,36 @@ export function isKeyOf<T>(object: T, key: any): key is keyof T {
     return key in object
 }
 
-export function setValue(object: unknown, path: string, value: unknown): unknown {
-    if (path.length === 0) {
-        return object;
-    }
+export function setValue(object: unknown, path: string, value: unknown): StringKeyObject | unknown {
     const props = path.split(".");
 
     const recursive = (current: unknown): unknown => {
         const prop = props.shift();
-        if (prop === undefined) {
+        if (prop === undefined || prop === "") {
             return current;
         }
         if (props.length === 0) {
-            current = { [prop]: value };
+            if (isObject(current)) {
+                current[prop] = value;
+            } else {
+                current = { [prop]: value };
+            }
             return current;
         }
         if (isObject(current) && isObject(current[prop])) {
-            current = current[prop];
-            return recursive(current);
+            current[prop] = recursive(current[prop]);
+            return current;
         }
 
         const newValue: StringKeyObject = { [prop]: {} };
-        newValue[prop] = recursive(newValue);
+        newValue[prop] = recursive(newValue[prop]);
         current = newValue;
         return current;
     };
     return recursive(object);
 }
 
-interface StringKeyObject {
+export interface StringKeyObject {
     [key: string]: unknown;
 }
 

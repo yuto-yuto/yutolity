@@ -6,7 +6,7 @@ This module provides utilities.
 
 ### Comparison
 
-They can be used instead of `obj !== null` or `obj !== undefined`.
+They can be used instead of `obj !== null` or `obj !== undefined` .
 
 #### notNull, notUndefined, hasValue
 
@@ -44,6 +44,28 @@ const val = getValueOf(obj, "key");
 
 const key: string = "key";
 const val2 = obj[key]; // error
+```
+
+#### setValue
+
+```ts
+setValue({}, "key", 1); // { key: 1 }
+setValue(undefined, "key", 1); // { key: 1 }
+setValue("value", "key.foo", 1); // { key: { foo: 1 } }
+setValue({ key: { hoge: 22 } }, "key.foo", 1);
+// { key: { foo: 1, hoge: 22 } }
+```
+
+### Array related
+
+#### range
+
+Create integer array.
+
+```ts
+range(5, 10); // [5, 6, 7, 8, 9, 10]
+range(2, -2); // [-2, -1, 0, 1, 2]
+range(2, 2); // []
 ```
 
 #### recursiveGetValueOf

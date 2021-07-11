@@ -116,7 +116,7 @@ describe("Object.ts", () => {
             expect(result).to.deep.equal({
                 key: {
                     foo: 1,
-                    hoge:22
+                    hoge: 22
                 }
             });
         });

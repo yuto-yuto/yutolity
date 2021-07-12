@@ -1,3 +1,5 @@
+import { getPrecision } from "./NumberUtils";
+
 /**
  * Create an integer array from start to end.
  * Value after decimal point is truncated.
@@ -34,10 +36,10 @@ export function rangeByStep(start: number, end: number, step: number): number[] 
         step = -step;
     }
 
-    const stepNumOfDecimal = getLength(step);
-    const endNumOfDecimal = getLength(end);
-    const maxNumOfDecimal = Math.max(stepNumOfDecimal, endNumOfDecimal);
-    const power = Math.pow(10, maxNumOfDecimal);
+    const stepPrecision = getPrecision(step);
+    const endPrecision = getPrecision(end);
+    const maxPrecision = Math.max(stepPrecision, endPrecision);
+    const power = Math.pow(10, maxPrecision);
     const diff = Math.abs(end - start);
     const count = Math.trunc(diff / step + 1);
     step = end - start > 0 ? step : -step;
@@ -49,13 +51,4 @@ export function rangeByStep(start: number, end: number, step: number): number[] 
             const value = intStart + increment;
             return Math.trunc(value) / power;
         });
-}
-
-function getLength(value: number): number {
-    const str = value.toString();
-    const index = str.indexOf("e-");
-    if (index !== -1) {
-        return parseInt(str.substring(index + 2));
-    }
-    return str.split(".")[1]?.length || 0;
 }

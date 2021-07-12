@@ -34,8 +34,8 @@ export function rangeByStep(start: number, end: number, step: number): number[] 
         step = -step;
     }
 
-    const stepNumOfDecimal = step.toString().split(".")[1]?.length || 0;
-    const endNumOfDecimal = end.toString().split(".")[1]?.length || 0;
+    const stepNumOfDecimal = getLength(step);
+    const endNumOfDecimal = getLength(end);
     const maxNumOfDecimal = Math.max(stepNumOfDecimal, endNumOfDecimal);
     const power = Math.pow(10, maxNumOfDecimal);
     const diff = Math.abs(end - start);
@@ -49,4 +49,13 @@ export function rangeByStep(start: number, end: number, step: number): number[] 
             const value = intStart + increment;
             return Math.trunc(value) / power;
         });
+}
+
+function getLength(value: number): number {
+    const str = value.toString();
+    const index = str.indexOf("e-");
+    if (index !== -1) {
+        return parseInt(str.substring(index + 2));
+    }
+    return str.split(".")[1]?.length || 0;
 }

@@ -55,5 +55,9 @@ describe("ArrayUtil", () => {
             const result = rangeByStep(0.000001, 0.000003, 0.000001);
             expect(result).to.deep.equal([0.000001, 0.000002, 0.000003]);
         });
+        it("should increment 0.00000001", () => {
+            const result = rangeByStep(0.00000001, 0.00000003, 0.00000001);
+            expect(result).to.deep.equal([0.00000001, 0.00000002, 0.00000003]);
+        });
     });
 });

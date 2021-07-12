@@ -12,9 +12,9 @@ describe("ArrayUtil", () => {
             const result = range(5.9, 10.1);
             expect(result).to.deep.equal([5, 6, 7, 8, 9, 10]);
         });
-        it("should create empty array when specifying the same value", () => {
+        it("should create array including only start value when specifying the same value", () => {
             const result = range(0, 0);
-            expect(result).to.deep.equal([]);
+            expect(result).to.deep.equal([0]);
         });
         it("should create array including negative value", () => {
             const result = range(-2, 3);
@@ -27,12 +27,16 @@ describe("ArrayUtil", () => {
     });
 
     describe("rangeByStep", () => {
-        it("should create empty array when start and end are the same value", () => {
+        it("should create array including start value when start and end are the same value", () => {
             const result = rangeByStep(5.5, 5.5, 1);
-            expect(result).to.be.empty;
+            expect(result).to.deep.equal([5.5]);
         });
-        it("should create integer array incremented 21", () => {
+        it("should create integer array incremented 2", () => {
             const result = rangeByStep(1, 7, 2);
+            expect(result).to.deep.equal([1, 3, 5, 7]);
+        });
+        it("should create integer array incremented 2 even if step is negative value", () => {
+            const result = rangeByStep(1, 7, -2);
             expect(result).to.deep.equal([1, 3, 5, 7]);
         });
         it("should create array incremented 0.1", () => {

@@ -5,12 +5,12 @@
  * @param end 
  */
 export function range(start: number, end: number): number[] {
-    start = Math.floor(start);
-    end = Math.floor(end);
+    start = Math.trunc(start);
+    end = Math.trunc(end);
 
     const diff = end - start;
     if (diff === 0) {
-        return [];
+        return [0];
     }
 
     const keys = Array(Math.abs(diff) + 1).keys();
@@ -27,31 +27,26 @@ export function range(start: number, end: number): number[] {
  * @param step Number to increment. If it's 0.1 the array example is [1, 1.1, 1.2]
  */
 export function rangeByStep(start: number, end: number, step: number): number[] {
-    if (end === start) {
-        return [];
+    if (end === start || step === 0) {
+        return [start];
     }
+    if (step < 0) {
+        step = -step;
+    }
+
     const stepNumOfDecimal = step.toString().split(".")[1]?.length || 0;
     const endNumOfDecimal = end.toString().split(".")[1]?.length || 0;
-
     const maxNumOfDecimal = Math.max(stepNumOfDecimal, endNumOfDecimal);
     const power = Math.pow(10, maxNumOfDecimal);
-    const increment = end - start > 0 ? step : -step;
-    const intEnd = Math.floor(end * power);
+    const diff = Math.abs(end - start);
+    const count = Math.trunc(diff / step + 1);
+    step = end - start > 0 ? step : -step;
 
-    const isFulFilled = end - start > 0 ?
-        (current: number) => current > intEnd:
-        (current: number) => current < intEnd
-
-    const result = [];
-    let current = start;
-    while (true) {
-        result.push(current);
-        // to address floating value
-        const intValue = Math.floor(current * power) + Math.floor(increment * power);
-        current = intValue / power;
-        if (isFulFilled(intValue)) {
-            break;
-        }
-    }
-    return result;
+    return Array.from(Array(count).keys())
+        .map(x => {
+            const intStart = Math.trunc(start * power);
+            const increment = Math.trunc(x * step * power);
+            const value = intStart + increment;
+            return Math.trunc(value) / power;
+        });
 }

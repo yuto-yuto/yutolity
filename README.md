@@ -65,7 +65,7 @@ Create integer array.
 ```ts
 range(5, 10); // [5, 6, 7, 8, 9, 10]
 range(2, -2); // [2, 1, 0, -1, -2]
-range(2, 2); // []
+range(2, 2); // [2]
 ```
 
 #### rangeByStep
@@ -74,7 +74,7 @@ Create number array but you can specify the number to increment.
 
 ```ts
 rangeByStep(1, 7, 2); // [1, 3, 5, 7]
-rangeByStep(0.1, 0.3, 0.1); // [0.1, 0.2, 0.3]
+rangeByStep(0.1, 0.3, -0.1); // [0.1, 0.2, 0.3]
 rangeByStep(0.3, -0.11, 0.1); // [0.3, 0.2, 0.1, 0, -0.1]
 rangeByStep(-0.2, 0.3, 1); // [-0.2]
 rangeByStep(0.000001, 0.000003, 0.000001); // [0.000001, 0.000002, 0.000003]

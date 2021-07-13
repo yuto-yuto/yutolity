@@ -91,3 +91,53 @@ const obj = {
 };
 const val = recursiveGetValueOf(obj, "value.value"); // 1
 ```
+
+### Number related
+
+#### getPrecision
+
+Return type: `number`
+
+```ts
+getPrecision(11.223); // 3
+getPrecision(11.0);   // 0
+getPrecision(1e-11);  // 11
+getPrecision(1e+21);  // 21
+```
+
+### String related
+
+#### indexesOf/lastIndexesOf
+
+Return type: `{index: number; foundString: string;}`
+
+```ts
+const text = "ab bc de bc";
+indexesOf(text, ["bc", "de"]);
+//{
+//     index: 3,
+//     foundString: "bc",
+// }
+lastIndexesOf(text, ["bc", "de"]);
+// {
+//     index: 9,
+//     foundString: "bc",
+// }
+```
+
+#### minIndexOf/maxIndexOf
+
+Return type: `{index: number; foundString: string;}`
+
+```ts
+minIndexOf(text, ["de", "ab", "bc"]);
+// {
+//     index: 0,
+//     foundString: "ab",
+// }
+maxIndexOf(text, ["bb", "de", "ab"]);
+// {
+//     index: 6,
+//     foundString: "de",
+// }
+```

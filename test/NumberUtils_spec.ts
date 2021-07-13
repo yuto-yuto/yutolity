@@ -20,5 +20,10 @@ describe("NumberUtils", () => {
             const result = getPrecision(1e-11);
             expect(result).to.equal(11);
         });
+        // 1e+20 is shown as normal number 10000...
+        it("should return 11 when the value is 1e+21", () => {
+            const result = getPrecision(1e+21);
+            expect(result).to.equal(21);
+        });
     });
 });

@@ -24,6 +24,13 @@ describe("StringUtils", () => {
                 foundString: "bc",
             });
         });
+        it("should skip first occurrence when specifying position", () => {
+            const result = indexesOf(text, ["bc", "de"], 5);
+            expect(result).to.deep.equal({
+                index: 9,
+                foundString: "bc",
+            });
+        });
     });
     describe("lastIndexesOf", () => {
         const text = "ab bc de bc";

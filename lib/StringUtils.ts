@@ -5,7 +5,6 @@ export interface IndexOfResult {
 
 function indexOfBase(
     cb: (searchString: string, position?: number) => number,
-    text: string,
     searchStrings: string[],
     position?: number
 ) {
@@ -29,7 +28,6 @@ function indexOfBase(
 export function indexesOf(text: string, searchStrings: string[], position?: number): IndexOfResult | undefined {
     return indexOfBase(
         text.indexOf.bind(text),
-        text,
         searchStrings,
         position);
 }
@@ -45,7 +43,6 @@ export function indexesOf(text: string, searchStrings: string[], position?: numb
 export function lastIndexesOf(text: string, searchStrings: string[], position?: number): IndexOfResult | undefined {
     return indexOfBase(
         text.lastIndexOf.bind(text),
-        text,
         searchStrings,
         position);
 }
